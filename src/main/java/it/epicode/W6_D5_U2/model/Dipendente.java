@@ -22,4 +22,6 @@ public class Dipendente {
     private String email;
 
 
+    public void setImageUrl(String imageUrl) {
+    }
 }

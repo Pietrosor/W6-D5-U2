@@ -16,11 +16,11 @@ public class ViaggioService {
     @Autowired
     private ViaggioRepository viaggioRepository;
 
-    public List<Viaggio> getAllViaggi() {
+    public static List<Viaggio> getAllViaggi() {
         return viaggioRepository.findAll();
     }
 
-    public Viaggio getViaggioById(Long id) {
+    public static Viaggio getViaggioById(Long id) {
         return viaggioRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Viaggio non trovato con id " + id));
     }

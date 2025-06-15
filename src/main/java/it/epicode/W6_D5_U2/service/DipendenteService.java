@@ -1,5 +1,7 @@
 package it.epicode.W6_D5_U2.service;
 
+import com.cloudinary.Cloudinary;
+import com.cloudinary.utils.ObjectUtils;
 import it.epicode.W6_D5_U2.exception.ResourceNotFoundException;
 import it.epicode.W6_D5_U2.model.Dipendente;
 import it.epicode.W6_D5_U2.repository.DipendenteRepository;
@@ -17,8 +19,8 @@ public class DipendenteService {
     @Autowired
     private DipendenteRepository dipendenteRepository;
 
-//    @Autowired
-//    private Cloudinary cloudinary;
+    @Autowired
+    private Cloudinary cloudinary;
 
     public List<Dipendente> getAllDipendenti() {
         return dipendenteRepository.findAll();
@@ -47,12 +49,14 @@ public class DipendenteService {
         dipendenteRepository.delete(dipendente);
     }
 
-//    public String uploadProfileImage(Long id, MultipartFile file) throws IOException {
-//        Dipendente dipendente = getDipendenteById(id);
-//        Map uploadResult = cloudinary.uploader().upload(file.getBytes(), ObjectUtils.emptyMap());
-//        String imageUrl = (String) uploadResult.get("url");
-//        dipendente.setImageUrl(imageUrl);
-//        dipendenteRepository.save(dipendente);
-//        return imageUrl;
-//    }
+
+
+    public String uploadProfileImage(Long id, MultipartFile file) throws IOException {
+        Dipendente dipendente = getDipendenteById(id);
+        Map uploadResult = cloudinary.uploader().upload(file.getBytes(), ObjectUtils.emptyMap());
+        String imageUrl = (String) uploadResult.get("url");
+        dipendente.setImageUrl(imageUrl);
+        dipendenteRepository.save(dipendente);
+        return imageUrl;
+    }
 }
